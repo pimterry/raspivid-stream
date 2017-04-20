@@ -1,6 +1,6 @@
 {
   "name": "raspivid-stream",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Raspberry pi cam video, as a stream you can send straight to web clients",
   "main": "index.js",
   "scripts": {
