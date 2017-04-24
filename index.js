@@ -38,14 +38,14 @@ const headerData = {
 };
 
 // This returns the live stream only, without the parameter chunks
-function getLiveStream() {
-    return raspivid({
+function getLiveStream(options) {
+    return raspivid(Object.assign({
         width: 960,
         height: 540,
         framerate: 20,
         profile: 'baseline',
         timeout: 0
-    })
+    }, options))
     .pipe(new Splitter(NALseparator))
     .pipe(new stream.Transform({ transform: function (chunk, encoding, callback) {
         const chunkWithSeparator = Buffer.concat([NALseparator, chunk]);
@@ -71,9 +71,9 @@ function getLiveStream() {
 
 var liveStream = null;
 
-module.exports = function () {
+module.exports = function (options) {
     if (!liveStream) {
-        liveStream = getLiveStream();
+        liveStream = getLiveStream(options);
     }
 
     return new StreamConcat([headerData.getStream(), liveStream]);
