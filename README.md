@@ -23,7 +23,7 @@ Server-side:
 ```js
 var raspividStream = require('raspivid-stream');
 
-var stream = raspividStream();
+var videoStream = raspividStream();
 
 // To stream over websockets:
 videoStream.on('data', (data) => {
